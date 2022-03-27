@@ -14,7 +14,10 @@ export const authenticate = async (req, res, next) => {
     if (!user) {
       throw new UnAuthenticatedError("Authentication Invalid");
     }
-    req.user = { userId: user._id, userRole: user.role };
+    if (!user.status) {
+      throw new UnAuthorizedError("Your account has been disabled");
+    }
+    req.user = { userId: user._id.toString(), userRole: user.role };
     next();
   } catch (error) {
     throw new UnAuthenticatedError("Authentication Invalid");

@@ -12,12 +12,12 @@ const bookRouter = express.Router();
 bookRouter
   .route("/")
   .get(findAll)
-  .post(authenticate, authorize("author"), create);
+  .post(authenticate, authorize("admin"), create);
 
 bookRouter
   .route("/:id")
   .get(findOne)
-  .put(authenticate, authorize("author"), update)
-  .delete(authenticate, authorize("admin","author"), remove);
+  .put(authenticate, authorize("admin"), update)
+  .delete(authenticate, authorize("admin"), remove);
 
 export { bookRouter };

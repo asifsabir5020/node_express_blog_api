@@ -1,6 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import { User } from "../models/user";
-import { NotFoundError, UnAuthenticatedError } from "../utils/errors";
+import { checkPermission, isAdmin } from "../utils";
+import {
+  NotFoundError,
+  UnAuthenticatedError,
+  UnAuthorizedError,
+} from "../utils/errors";
 
 export const register = async (req, res) => {
   const user = await User.create(req.body);
@@ -16,6 +21,10 @@ export const login = async (req, res) => {
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
     throw new UnAuthenticatedError("Invalid Credentials");
+  }
+
+  if (!user.status) {
+    throw new UnAuthorizedError("Your account has been disabled");
   }
   const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
@@ -40,10 +49,35 @@ export const me = async (req, res) => {
   });
 };
 
-export const findAllUsers = async (req, res) => {
-  const users = await User.find();
+export const update = async (req, res) => {
+  const { userRole, userId } = req.user;
+  const { id } = req.params;
+  const userParams = {};
+  userParams.name = req.body.name;
+
+  if (isAdmin(userRole)) {
+    if (req.body.status !== undefined) {
+      userParams.status = req.body.status;
+    }
+  }
+
+  const user = await User.findOne({ _id: id });
+
+  if (!user) {
+    throw new NotFoundError(`No User with id :${id}`);
+  }
+
+  if (!checkPermission(userId, id) && !isAdmin(userRole)) {
+    throw new UnAuthorizedError();
+  }
+
+  const updatedUser = await User.findOneAndUpdate({ _id: id }, userParams, {
+    new: true,
+    runValidators: false,
+  });
+
   res.status(StatusCodes.OK).json({
     success: true,
-    data: users,
+    data: updatedUser,
   });
 };

@@ -16,7 +16,7 @@ export class UnAuthenticatedError extends Error {
 
 export class UnAuthorizedError extends Error {
   constructor(message) {
-    super(message)
+    super(message || `You don't have the permissions for this operation`)
     this.statusCode = StatusCodes.FORBIDDEN
   }
 }
