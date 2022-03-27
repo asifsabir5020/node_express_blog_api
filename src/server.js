@@ -7,8 +7,10 @@ import 'express-async-errors';
 import { connectDB } from "./db/connection";
 import { errorHandler } from "./middlewares/errors";
 import { bookRouter } from './routers/book';
+import { postRouter } from "./routers/post";
 import { authRouter } from "./routers/auth";
 import { NotFoundError } from "./utils/errors";
+
 
 // as this is helpful in development
 if(process.env.NODE_ENV === 'development'){
@@ -19,6 +21,7 @@ app.use(express.json());
 
 app.use('/api/v1/users', authRouter);
 app.use('/api/v1/books', bookRouter);
+app.use('/api/v1/posts', postRouter);
 
 
 //middleware for not found 404
