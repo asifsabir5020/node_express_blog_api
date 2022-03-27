@@ -1,27 +1,16 @@
-# Node Express Role Base Authorization App
-This is a boilerplate for auth functionality, covering authentication and authorization.
-It contains a complete sample CRUD operation.
+# Node Express Blog App
+This is a blog api, build with Node and Express. This is a practical implementation of the concepts related to Node, Express and MongoDB.
 
 `Note: Node >= 16`
 
 
 # Setup
-`git clone https://github.com/asifsabir5020/node_express_role_base_authorization_app .git`
+`git clone https://github.com/asifsabir5020/node_express_blog_api.git`
 
-`cd node_express_role_base_authorization_app`
+`cd node_express_blog_api`
 
 `create .env file with the help of .env.sample file`
 
 `npm install`
 
 `npm run dev`
-
-# Roles Short Description
-
-In User Model we set three roles `admin` `author` `reader`
-
-Only `admin` authorized to `{{base_url}}/users/all`
-
-`author` can `create`, `update` and `delete`, the `book`
-
-`admin` can also delete a `book`
