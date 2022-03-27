@@ -1,0 +1,42 @@
+{
+  "name": "node_express_blog_api",
+  "version": "1.0.0",
+  "description": "this is a a node express blog api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server"
+  },
+  "keywords": [
+    "node",
+    "auth",
+    "authentication",
+    "authorization",
+    "blog",
+    "backend",
+    "node-api",
+    "express-blog-api"
+  ],
+  "author": "Muhammad Asif Sabir",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-async-errors": "^3.1.1",
+    "http-status-code": "^2.1.0",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.8",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}
