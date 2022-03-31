@@ -12,6 +12,7 @@ import { authenticate } from "../middlewares/auth";
 const postRouter = express.Router();
 
 postRouter.route("/user/:id").get(userAllPosts);
+postRouter.route("/user").get(authenticate, logedInUserAllPosts);
 
 
 postRouter.route("/").get(findAll).post(authenticate, create);

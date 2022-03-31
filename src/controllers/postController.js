@@ -81,7 +81,7 @@ export const remove = async (req, res) => {
 };
 
 export const userAllPosts = async (req, res) => {
-  const posts = await Post.find({ user: req.params });
+  const posts = await Post.find({ user: req.params.id });
   res.status(StatusCodes.OK).json({
     success: true,
     data: posts,
